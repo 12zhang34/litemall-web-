@@ -1,8 +1,9 @@
 from datetime import time
 import allure
-from selenium import webdriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from admin.web_autotest.utils.driver_factory import get_driver
 
 
 class BasePage:
@@ -13,9 +14,7 @@ class BasePage:
         if base_driver:
             self.driver = base_driver
         else:
-            self.driver = webdriver.Chrome()
-            self.driver.implicitly_wait(3)
-            self.driver.maximize_window()
+            self.driver = get_driver()
 
         if not self.driver.current_url.startswith("http"):
             self.driver.get(self._BASE_URL)
@@ -32,8 +31,14 @@ class BasePage:
         else:
             return self.driver.find_elements(*by)
 
-    def do_send_keys(self, value, by, locator=None):
-        ele = self.do_find(by, locator)
+    def do_send_keys(self, value, by, locator=None, timeout=10):
+        if locator:
+            loc = (by, locator)
+        else:
+            loc = by
+        ele = WebDriverWait(self.driver, timeout).until(
+            EC.element_to_be_clickable(loc)
+        )
         ele.clear()
         ele.send_keys(value)
 

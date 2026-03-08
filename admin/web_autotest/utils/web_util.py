@@ -13,6 +13,6 @@ def click_execption(by, element, attempts=5):
                 driver.find_element(by, element).click()
                 return True
             except Exception:
-                print("出现异常啦")
+                print("出现异常")
         return False
     return _inner

@@ -3,7 +3,7 @@ import allure
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from admin.web_autotest.utils.driver_factory import get_driver
+from web_autotest.admin.utils.driver_factory import get_driver
 
 
 class BasePage:

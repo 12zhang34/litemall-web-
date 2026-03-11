@@ -2,9 +2,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from admin.web_autotest.page_object.base_page import BasePage
-from admin.web_autotest.utils.log_util import logger
-from admin.web_autotest.utils.web_util import click_execption
+from web_autotest.admin.page_object.base_page import BasePage
+from web_autotest.admin.utils.log_util import logger
+from web_autotest.admin.utils.web_util import click_execption
 
 
 class CategoryCreatePage(BasePage):
@@ -14,7 +14,7 @@ class CategoryCreatePage(BasePage):
     __ERROR_MSG = (By.XPATH, "//div[contains(@class, 'el-message') and contains(text(),'已存在')]")
 
     def create_category(self, category_id, category_name):
-        logger.info("创建类目页面：创建类目")
+        logger.info("创建商品页面：创建商品")
 
         # 1. 等待弹窗中的输入框可见（确保弹窗已出现）
         WebDriverWait(self.driver, 10).until(
@@ -45,5 +45,5 @@ class CategoryCreatePage(BasePage):
         # 6. 点击确认按钮
         WebDriverWait(self.driver, 10).until(click_execption(*self.__BTN_CONFIRM))
 
-        from admin.web_autotest.page_object.category_list_page import CategoryListPage
+        from web_autotest.admin.page_object.category_list_page import CategoryListPage
         return CategoryListPage(self.driver)

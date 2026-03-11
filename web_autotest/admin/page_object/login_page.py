@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
-from admin.web_autotest.page_object.base_page import BasePage
-from admin.web_autotest.utils.log_util import logger
+from web_autotest.admin.page_object.base_page import BasePage
+from web_autotest.admin.utils.log_util import logger
 
 
 class LoginPage(BasePage):
@@ -20,5 +20,5 @@ class LoginPage(BasePage):
         self.do_find(self.__BTN_LOGIN).click()
 
         #->首页
-        from admin.web_autotest.page_object.home_page import HomePage
+        from web_autotest.admin.page_object.home_page import HomePage
         return HomePage(self.driver)

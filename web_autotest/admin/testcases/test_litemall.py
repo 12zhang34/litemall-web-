@@ -1,18 +1,18 @@
 import pytest
 
-from admin.web_autotest.page_object.login_page import LoginPage
+from web_autotest.admin.page_object.login_page import LoginPage
 
+@pytest.fixture(scope='class')
+def home():
+    home_page = LoginPage().login()
+    yield  home_page
+    home_page.do_quit()
 
 class TestLiteMall:
-     def setup_class(self):
-         self.home = LoginPage().login()
-
-     def teardown_class(self):
-          self.home.do_quit()
 
      @pytest.mark.parametrize("category_id, category_name", [("1499288", "行李箱"), ("1499286", "书包"), ("1499299", "课本")])
-     def test_add_type(self, category_id, category_name):
-         list_page = self.home\
+     def test_add_type(self, home, category_id, category_name):
+         list_page = home\
              .go_to_category()\
              .click_add()\
              .create_category(category_id, category_name)
@@ -21,8 +21,8 @@ class TestLiteMall:
          list_page.delete_category(category_name)
 
      @pytest.mark.parametrize("category_id, category_name", [("1499288", "行李箱"), ("1499286", "书包"), ("1499299", "课本")])
-     def test_delete_type(self, category_id, category_name):
-         res = self.home\
+     def test_delete_type(self, home, category_id, category_name):
+         res = home\
              .go_to_category()\
              .click_add()\
              .create_category(category_id, category_name)\

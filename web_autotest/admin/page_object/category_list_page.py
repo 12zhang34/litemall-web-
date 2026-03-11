@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from admin.web_autotest.page_object.base_page import BasePage
-from admin.web_autotest.utils.log_util import logger
-from admin.web_autotest.utils.web_util import click_execption
+from web_autotest.admin.page_object.base_page import BasePage
+from web_autotest.admin.utils.log_util import logger
+from web_autotest.admin.utils.web_util import click_execption
 
 
 class CategoryListPage(BasePage):
@@ -18,7 +18,7 @@ class CategoryListPage(BasePage):
         logger.info("商品列表页面：点击添加")
         self.do_find(self.__BTN_ADD).click()
 
-        from admin.web_autotest.page_object.category_create_page import CategoryCreatePage
+        from web_autotest.admin.page_object.category_create_page import CategoryCreatePage
         return CategoryCreatePage(self.driver)
 
     def get_operate_result(self):
